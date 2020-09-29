@@ -60,7 +60,7 @@ class Prime extends React.Component{
         for (let i=0;i<100;i++){
             pnum100.push(generatorObject.next().value);
         }
-       /* function listToMatrix(list, elementsPerSubArray) {
+        function listToMatrix(list, elementsPerSubArray) {
             var matrix = [], i, k;
         
             for (i = 0, k = -1; i < list.length; i++) {
@@ -74,7 +74,7 @@ class Prime extends React.Component{
         
             return matrix;
         }
-        var matrix = listToMatrix(pnum100, 25); */
+        var matrix = listToMatrix(pnum100, 5);
 
         return (
           <div ><br/>
@@ -85,13 +85,13 @@ class Prime extends React.Component{
               
                 <br/>
            <h2>100 Prime Number Table</h2><br/>
-           
-            <ul class="flex-container">
-            {pnum100.map(itemx => (
-                <li class="flex-item">{itemx}</li>
+           {matrix.map(item => (
+               <ul class="flex-container">
+               {item.map(itemi => (
+                <li class="flex-item">{itemi}</li>
                 ))}
-            </ul>
-          
+                </ul>
+            ))}
            
         <br/><br/>
            <h2>{this.state.pcnt} Prime Number from 1-100</h2><br/>
