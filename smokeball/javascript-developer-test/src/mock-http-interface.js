@@ -1,12 +1,11 @@
 'use strict';
 
-const urlPrefix = 'http://www.smokeballdev.com';
+const urlPrefix = `http://www.smokeballdev.com`;
 
 const urlToResponseLookup = {
-  [urlPrefix+'/arnie0']: 'Get to the chopper',
-  [urlPrefix+'/arnie1']: 'MY NAME IS NOT QUAID',
-  [urlPrefix+'/arnie2']: "What's wrong with Wolfie?",
-  [urlPrefix+'/arnie3']: 'Your request has been terminated',
+  [`${urlPrefix}/arnie0`]: 'Get to the chopper',
+  [`${urlPrefix}/arnie1`]: 'MY NAME IS NOT QUAID',
+  [`${urlPrefix}/arnie2`]: `What's wrong with Wolfie?`,
 };
 
 const httpRequestMockP = (url) => new Promise((resolve, reject) => {

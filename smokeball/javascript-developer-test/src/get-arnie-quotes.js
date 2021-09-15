@@ -8,8 +8,8 @@ const getArnieQuotes = async (urls) => {
       var stringify = JSON.parse(data.body);
       return stringify["message"];
     });
-    if(i==3){
-      res.push({ 'FAILURE': msg })
+    if(msg == 'Your request has been terminated'){
+      res.push({ 'FAILURE': 'Your request has been terminated' })
     }else{
     res.push({ 'Arnie Quote': msg })
     }
