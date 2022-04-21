@@ -17,6 +17,7 @@ const BidList = () => {
     useEffect(
         () => {
         getBids();
+        minBid();
         timers();
     });
     const timers = () => {
@@ -29,15 +30,22 @@ const BidList = () => {
     const getBids = async () => {
         const response = await axios.get('http://localhost:5000/bids');
         setBid(response.data);
-        // for(let i=0; i<response.data.length; i++){
-        //     response.data.amount
-        // }
     }
  
     const deleteBid = async (id) => {
         await axios.delete(`http://localhost:5000/bids/${id}`);
         state.status = 'delSuccess';
         getBids();
+    }
+
+    const minBid = async () => {
+        const response = await axios.get(`http://localhost:5000/bids/min`);
+        if(response && response.data.length>0) {
+            const res = response.data.map((dat)=>{
+                return dat['min(`amount`)'];
+            });
+            setResData1(res);
+        }
     }
  
     return (
@@ -46,9 +54,9 @@ const BidList = () => {
             <div className="table-title">
                 <div className="row">
                     <div className="col-sm-6">
-                        { show && state.status==='addSuccess' && 'Bid added successfully' }
+                        {/* { show && state.status==='addSuccess' && 'Bid added successfully' }
                         { show && state.status==='editSuccess' && 'Bid updated successfully' }
-                        { show && state.status==='delSuccess' && 'Bid deleted successfully' }
+                        { show && state.status==='delSuccess' && 'Bid deleted successfully' } */}
 						<h2>Bid <b>List</b></h2>
 					</div>
 					<div className="col-sm-6">
@@ -94,6 +102,11 @@ const BidList = () => {
                      
                 </tbody>
             </table>
+            {resData1 && resData1.map((Bi) => (
+                <div class="container">
+                <b>The winning amount is : </b> {Bi} <br/> <br/>
+              </div>
+            ))}
         </div>
     )
 }

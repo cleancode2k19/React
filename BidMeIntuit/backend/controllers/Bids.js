@@ -1,5 +1,5 @@
 import Bid from "../models/bidModel.js";
- 
+import Sequelize from 'sequelize';
 export const getAllBids = async (req, res) => {
     try {
         const Bids = await Bid.findAll();
@@ -12,14 +12,25 @@ export const getAllBids = async (req, res) => {
 export const getBidById = async (req, res) => {
     try {
         console.log(req.params.id);
-        const Bid = await Bid.findAll({
-            where: {
-                id: req.params.id
-            }
-        });
-        console.log('update00000000');
-        console.log(Bid);
-        res.json(Bid[0]);
+        if(req.params.id === 'min'){
+            const Bids = await Bid.findAll({
+                attributes: [Sequelize.fn('min', Sequelize.col('amount'))],
+                group: ["title"],
+                raw: true,
+            });
+            res.json(Bids);
+        } 
+        // else {
+        //     const Bid = Bid.findAll({
+        //         where: {
+        //             id: req.params.id
+        //         }
+        //     }).then((result) =>{
+                
+        //     }).catch();
+        //     console.log(Bid);
+        //     res.json(Bid);
+        // }
     } catch (error) {
         res.json({ message: error.message });
     }  
