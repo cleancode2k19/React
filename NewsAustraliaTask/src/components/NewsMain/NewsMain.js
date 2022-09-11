@@ -10,6 +10,8 @@ import { Row, Col } from "react-bootstrap";
 import { Header, Container, card } from "./index";
 import { endpointPath } from "../../config/api";
 import { header } from "../../config/config";
+import HeadNews from "./HeadNews";
+import SideBarNews from "./SideBarNews";
 
 
 function NewsMain(props) {
@@ -81,6 +83,7 @@ function NewsMain(props) {
 
   return (
     <>
+      <HeadNews />
       <Header>
         {header(capitaLize(props.category))}
       </Header>
@@ -93,6 +96,13 @@ function NewsMain(props) {
       >
         <Container>
           <Row>
+            <Col
+            sm={12}
+            md={10}
+            lg={10}
+            xl={10}
+            >
+            <Row>
             {articles.map((element,num) => {
               return (
                 <Col
@@ -154,6 +164,19 @@ function NewsMain(props) {
                 </Col>
               );
             })}
+            </Row>
+            </Col>
+            <Col
+            sm={12}
+            md={2}
+            lg={2}
+            xl={2}
+            >
+            <div>
+            <SideBarNews />
+              </div>
+            </Col>
+            
           </Row>
         </Container>
       </InfiniteScroll>
